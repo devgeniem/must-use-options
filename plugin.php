@@ -112,16 +112,16 @@ class ReadonlyOptions {
     /**
      * Outputs <script> tag which sets some elements to readonly state
      *
-     * @param array $input_element_ids - List of elements to turn to readonly state
+     * @param array $input_element_names - List of elements to turn to readonly state
      * @param string $hover_text - Helper text for admin users which they can see when hovering over elements
      */
-    static function print_admin_readonly_js_script( $input_element_ids, $hover_text ) {
+    static function print_admin_readonly_js_script( $input_element_names, $hover_text ) {
         ?>
             <script>
                 (function() {
                     // Turn these input elements to readOnly to present that their values are forced
-                    ['<?php echo implode("','",$input_element_ids); ?>'].forEach(function(elementId) {
-                        var el =  document.getElementById(elementId);
+                    ['<?php echo implode("','",$input_element_names); ?>'].forEach(function(elementName) {
+                        var el = document.querySelector( "[name='" + elementName + "']" );
                         if ( typeof(el) != 'undefined' && el != null ) {
                             el.readOnly = true;
                             el.title = '<?php echo $hover_text;?>';
